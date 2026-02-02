@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - RC Technologies</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========== GLOBAL STYLES ========== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2C3E50, #3498DB);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        /* ========== LOGIN CONTAINER ========== */
+        
+        .login-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ========== LEFT SIDE ========== */
+        
+        .login-left {
+            background: linear-gradient(135deg, #2C3E50, #3498DB);
+            color: white;
+            padding: 50px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .brand-logo i {
+            font-size: 60px;
+            color: #E74C3C;
+            margin-bottom: 20px;
+        }
+        
+        .brand-logo h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        .features-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features-list i {
+            color: #4CD137;
+            font-size: 18px;
+        }
+        
+        .back-home {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .back-home a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .back-home a:hover {
+            color: #E74C3C;
+        }
+        /* ========== RIGHT SIDE ========== */
+        
+        .login-right {
+            padding: 50px;
+        }
+        /* Form Tabs */
+        
+        .form-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            color: #2C3E50;
+        }
+        
+        .tab-btn.active {
+            color: #E74C3C;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #E74C3C;
+        }
+        /* Forms */
+        
+        .form-wrapper {
+            position: relative;
+            min-height: 400px;
+        }
+        
+        .form-page {
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .form-page.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2C3E50;
+        }
+        /* Form Elements */
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2C3E50;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #3498DB;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+        
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .country-code {
+            width: 120px;
+        }
+        
+        .phone-number {
+            flex: 1;
+        }
+        /* Buttons */
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #E74C3C, #FF6B6B);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        /* Social Login */
+        
+        .social-divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #666;
+        }
+        
+        .social-divider::before,
+        .social-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .social-divider span {
+            padding: 0 15px;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .social-btn.google {
+            background: #DB4437;
+        }
+        
+        .social-btn.facebook {
+            background: #4267B2;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        /* Links */
+        
+        .form-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .form-link {
+            color: #3498DB;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .form-link:hover {
+            color: #E74C3C;
+            text-decoration: underline;
+        }
+        /* Error Messages */
+        
+        .error-msg {
+            display: block;
+            color: #E74C3C;
+            font-size: 12px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+        /* OTP Section */
+        
+        .otp-container {
+            text-align: center;
+        }
+        
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .otp-input:focus {
+            border-color: #3498DB;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+        
+        .timer {
+            color: #666;
+            margin-top: 10px;
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            .login-left {
+                padding: 30px;
+            }
+            .login-right {
+                padding: 30px;
+            }
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            .phone-group {
+                flex-direction: column;
+            }
+            .country-code {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========== LOGIN CONTAINER ========== -->
+    <div class="login-container">
+        <!-- Left Side - Brand Info -->
+        <div class="login-left">
+            <div class="brand-logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>RC Technologies</h1>
+                <p>Your Security Partner in Karachi</p>
+            </div>
+
+            <h3>Welcome to RC Technologies</h3>
+            <p>Login to access your account and manage your orders.</p>
+
+            <ul class="features-list">
+                <li><i class="fas fa-check-circle"></i> Track your orders</li>
+                <li><i class="fas fa-check-circle"></i> Manage your profile</li>
+                <li><i class="fas fa-check-circle"></i> Save products to wishlist</li>
+                <li><i class="fas fa-check-circle"></i> Get exclusive offers</li>
+                <li><i class="fas fa-check-circle"></i> 24/7 Customer support</li>
+            </ul>
+
+            <div class="back-home">
+                <a href="index.html">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Side - Forms -->
+        <div class="login-right">
+            <!-- Form Tabs -->
+            <div class="form-tabs">
+                <button class="tab-btn active" id="loginTab" onclick="showForm('login')">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="tab-btn" id="signupTab" onclick="showForm('signup')">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+
+            <!-- Forms Container -->
+            <div class="form-wrapper">
+                <!-- ========== LOGIN FORM ========== -->
+                <div class="form-page active" id="loginForm">
+                    <h2 class="form-title">Login to Your Account</h2>
+
+                    <form id="loginFormElement" onsubmit="return validateLogin()">
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                            <span class="error-msg" id="loginEmailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Password *</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                            <span class="error-msg" id="loginPasswordError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+
+                    <div class="form-links">
+                        <a class="form-link" onclick="showForm('forgot')">
+                            <i class="fas fa-key"></i> Forgot Password?
+                        </a>
+                    </div>
+
+                    <div class="social-divider">
+                        <span>Or login with</span>
+                    </div>
+
+                    <div class="social-buttons">
+                        <div class="social-btn google" onclick="loginWithGoogle()">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-btn facebook" onclick="loginWithFacebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== SIGNUP FORM ========== -->
+                <div class="form-page" id="signupForm">
+                    <h2 class="form-title">Create New Account</h2>
+
+                    <form id="signupFormElement" onsubmit="return validateSignup()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                                    <span class="error-msg" id="firstNameError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
+                            <span class="error-msg" id="signupEmailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <div class="phone-group">
+                                <select class="form-control country-code" id="countryCode">
+                                    <option value="+92">+92 (Pakistan)</option>
+                                    <option value="+1">+1 (USA)</option>
+                                    <option value="+91">+91 (India)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                </select>
+                                <input type="tel" class="form-control phone-number" id="phoneNumber" placeholder="300 1234567" required>
+                            </div>
+                            <span class="error-msg" id="phoneError"></span>
+                            <small class="text-muted">Enter 10-digit number without 0</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Password *</label>
+                                    <input type="password" class="form-control" id="signupPassword" placeholder="Create password" required>
+                                    <span class="error-msg" id="passwordError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Confirm Password *</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" required>
+                                    <span class="error-msg" id="confirmPasswordError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsConditions" required>
+                                <label class="form-check-label" for="termsConditions">
+                                    I agree to the <a href="#" class="form-link">Terms & Conditions</a> 
+                                    and <a href="#" class="form-link">Privacy Policy</a>
+                                </label>
+                            </div>
+                            <span class="error-msg" id="termsError"></span>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+
+                    <div class="social-divider">
+                        <span>Or sign up with</span>
+                    </div>
+
+                    <div class="social-buttons">
+                        <div class="social-btn google" onclick="signupWithGoogle()">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-btn facebook" onclick="signupWithFacebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== FORGOT PASSWORD FORM ========== -->
+                <div class="form-page" id="forgotForm">
+                    <h2 class="form-title">Reset Password</h2>
+                    <p class="text-center text-muted mb-4">Enter your email to receive password reset instructions</p>
+
+                    <form id="forgotFormElement" onsubmit="return validateForgotPassword()">
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="forgotEmail" placeholder="Enter your registered email" required>
+                            <span class="error-msg" id="forgotEmailError"></span>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Reset Link
+                        </button>
+                    </form>
+
+                    <div class="form-links">
+                        <a class="form-link" onclick="showForm('login')">
+                            <i class="fas fa-arrow-left"></i> Back to Login
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ========== OTP VERIFICATION FORM ========== -->
+                <div class="form-page" id="otpForm">
+                    <h2 class="form-title">Verify Phone Number</h2>
+                    <p class="text-center text-muted mb-4">We've sent an OTP to your phone number</p>
+
+                    <div class="otp-container">
+                        <div class="otp-inputs">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 1)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 2)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 3)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 4)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 5)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 6)">
+                        </div>
+
+                        <button type="button" class="submit-btn" onclick="verifyOTP()">
+                            <i class="fas fa-check-circle"></i> Verify OTP
+                        </button>
+
+                        <div class="timer" id="timerText">
+                            Resend OTP in <span id="timer">60</span> seconds
+                        </div>
+
+                        <div class="form-links">
+                            <a class="form-link" onclick="resendOTP()" id="resendLink" style="display: none;">
+                                <i class="fas fa-redo"></i> Resend OTP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        // ========== GLOBAL VARIABLES ==========
+        let currentForm = 'login';
+        let otpTimer = null;
+        let otpTimeLeft = 60;
+
+        // ========== FORM TOGGLE SYSTEM ==========
+        function showForm(formType) {
+            console.log('Switching to form:', formType);
+
+            // Update current form
+            currentForm = formType;
+
+            // Hide all forms
+            document.querySelectorAll('.form-page').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected form
+            const targetForm = document.getElementById(formType + 'Form');
+            if (targetForm) {
+                targetForm.classList.add('active');
+                console.log('Form shown:', formType);
+            } else {
+                console.error('Form not found:', formType);
+            }
+
+            // Activate corresponding tab
+            const tabId = formType + 'Tab';
+            const tabBtn = document.getElementById(tabId);
+            if (tabBtn) {
+                tabBtn.classList.add('active');
+            }
+
+            // Special handling for OTP form
+            if (formType === 'otp') {
+                startOTPTimer();
+                focusFirstOTP();
+            }
+
+            // Clear all errors
+            clearErrors();
+
+            return false;
+        }
+
+        // ========== FORM VALIDATIONS ==========
+
+        // Clear all error messages
+        function clearErrors() {
+            document.querySelectorAll('.error-msg').forEach(error => {
+                error.textContent = '';
+            });
+        }
+
+        // Show error message
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = message;
+            }
+        }
+
+        // Email validation
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Phone validation (Pakistan)
+        function isValidPhone(phone) {
+            // Remove all non-digits
+            const cleanPhone = phone.replace(/\D/g, '');
+            // Check if 10 digits (without 0) or 11 digits (with 0)
+            return /^(3\d{9}|0\d{10})$/.test(cleanPhone);
+        }
+
+        // Password validation
+        function isValidPassword(password) {
+            // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
+            return password.length >= 8;
+        }
+
+        // ========== LOGIN VALIDATION ==========
+        function validateLogin() {
+            console.log('Validating login...');
+            clearErrors();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            let isValid = true;
+
+            // Email validation
+            if (!email) {
+                showError('loginEmailError', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('loginEmailError', 'Please enter a valid email');
+                isValid = false;
+            }
+
+            // Password validation
+            if (!password) {
+                showError('loginPasswordError', 'Password is required');
+                isValid = false;
+            } else if (password.length < 6) {
+                showError('loginPasswordError', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate login process
+                console.log('Login successful!');
+                alert('Login successful! Redirecting to dashboard...');
+
+                // Save user to localStorage (for demo)
+                localStorage.setItem('currentUser', JSON.stringify({
+                    email: email,
+                    name: email.split('@')[0],
+                    loggedIn: true
+                }));
+
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = 'user-dashboard.html';
+                }, 1000);
+            }
+
+            return false; // Prevent form submission
+        }
+
+        // ========== SIGNUP VALIDATION ==========
+        function validateSignup() {
+            console.log('Validating signup...');
+            clearErrors();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termsChecked = document.getElementById('termsConditions').checked;
+
+            let isValid = true;
+
+            // First Name validation
+            if (!firstName) {
+                showError('firstNameError', 'First name is required');
+                isValid = false;
+            } else if (firstName.length < 2) {
+                showError('firstNameError', 'Name must be at least 2 characters');
+                isValid = false;
+            }
+
+            // Email validation
+            if (!email) {
+                showError('signupEmailError', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('signupEmailError', 'Please enter a valid email');
+                isValid = false;
+            }
+
+            // Phone validation
+            if (!phone) {
+                showError('phoneError', 'Phone number is required');
+                isValid = false;
+            } else if (!isValidPhone(phone)) {
+                showError('phoneError', 'Please enter a valid Pakistan phone number (e.g., 3001234567)');
+                isValid = false;
+            }
+
+            // Password validation
+            if (!password) {
+                showError('passwordError', 'Password is required');
+                isValid = false;
+            } else if (!isValidPassword(password)) {
+                showError('passwordError', 'Password must be at least 8 characters');
+                isValid = false;
+            }
+
+            // Confirm password validation
+            if (!confirmPassword) {
+                showError('confirmPasswordError', 'Please confirm your password');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showError('confirmPasswordError', 'Passwords do not match');
+                isValid = false;
+            }
+
+            // Terms validation
+            if (!termsChecked) {
+                showError('termsError', 'You must agree to the terms and conditions');
+                isValid = false;
+            }
+
+            if (isValid) {
+                console.log('Signup validation passed!');
+
+                // Simulate signup process
+                const userData = {
+                    firstName: firstName,
+                    lastName: document.getElementById('lastName').value.trim(),
+                    email: email,
+                    phone: document.getElementById('countryCode').value + phone,
+                    createdAt: new Date().toISOString()
+                };
+
+                // Save user data to localStorage (for demo)
+                let users = JSON.parse(localStorage.getItem('users') || '[]');
+                users.push(userData);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                console.log('User saved:', userData);
+
+                // Show OTP form
+                showForm('otp');
+            }
+
+            return false; // Prevent form submission
+        }
+
+        // ========== FORGOT PASSWORD VALIDATION ==========
+        function validateForgotPassword() {
+            console.log('Validating forgot password...');
+            clearErrors();
+
+            const email = document.getElementById('forgotEmail').value.trim();
+
+            let isValid = true;
+
+            if (!email) {
+                showError('forgotEmailError', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('forgotEmailError', 'Please enter a valid email');
+                isValid = false;
+            }
+
+            if (isValid) {
+                console.log('Password reset email sent!');
+                alert('Password reset instructions have been sent to your email!');
+                showForm('login');
+            }
+
+            return false;
+        }
+
+        // ========== OTP SYSTEM ==========
+
+        // Start OTP timer
+        function startOTPTimer() {
+            otpTimeLeft = 60;
+            document.getElementById('timer').textContent = otpTimeLeft;
+            document.getElementById('resendLink').style.display = 'none';
+            document.getElementById('timerText').style.display = 'block';
+
+            clearInterval(otpTimer);
+
+            otpTimer = setInterval(() => {
+                otpTimeLeft--;
+                document.getElementById('timer').textContent = otpTimeLeft;
+
+                if (otpTimeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    document.getElementById('timerText').style.display = 'none';
+                    document.getElementById('resendLink').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        // Focus first OTP input
+        function focusFirstOTP() {
+            document.querySelector('.otp-input').focus();
+        }
+
+        // Move to next OTP input
+        function moveToNext(input, nextIndex) {
+            if (input.value.length === 1) {
+                const inputs = document.querySelectorAll('.otp-input');
+                if (nextIndex < inputs.length) {
+                    inputs[nextIndex].focus();
+                }
+            }
+        }
+
+        // Verify OTP
+        function verifyOTP() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let otp = '';
+
+            otpInputs.forEach(input => {
+                otp += input.value;
+            });
+
+            if (otp.length === 6) {
+                console.log('OTP verified:', otp);
+                alert('Phone number verified successfully! Account created.');
+
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = 'user-dashboard.html';
+                }, 1000);
+            } else {
+                alert('Please enter complete 6-digit OTP');
+            }
+        }
+
+        // Resend OTP
+        function resendOTP() {
+            console.log('Resending OTP...');
+            alert('New OTP has been sent to your phone number!');
+            startOTPTimer();
+        }
+
+        // ========== SOCIAL LOGIN ==========
+        function loginWithGoogle() {
+            console.log('Login with Google');
+            alert('Google login would be implemented here');
+        }
+
+        function loginWithFacebook() {
+            console.log('Login with Facebook');
+            alert('Facebook login would be implemented here');
+        }
+
+        function signupWithGoogle() {
+            console.log('Signup with Google');
+            alert('Google signup would be implemented here');
+        }
+
+        function signupWithFacebook() {
+            console.log('Signup with Facebook');
+            alert('Facebook signup would be implemented here');
+        }
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Login page loaded');
+
+            // Check if user is already logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                console.log('User already logged in');
+            }
+
+            // Set default country code
+            document.getElementById('countryCode').value = '+92';
+
+            // Auto-focus first input in active form
+            const activeForm = document.querySelector('.form-page.active');
+            if (activeForm) {
+                const firstInput = activeForm.querySelector('input');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

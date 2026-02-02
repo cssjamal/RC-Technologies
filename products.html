@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - RC Technologies | CCTV, DVR, NVR Karachi</title>
+
+    <!-- All same CSS/JS files as index.html -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ========== HEADER & NAVBAR (Same as index.html) ========== -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contact-info">
+                            <span><i class="fas fa-phone-alt"></i> 021-1234567</span>
+                            <span class="ms-3"><i class="fab fa-whatsapp"></i> 0300-1234567</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <div class="logo-container">
+                        <i class="fas fa-shield-alt logo-icon"></i>
+                        <span class="logo-text">
+                            <strong>RC</strong> Technologies
+                        </span>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-camera"></i> Products
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="dahua.html">Dahua Products</a></li>
+                                <li><a class="dropdown-item" href="hikvision.html">Hikvision Products</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#cctv">CCTV Cameras</a></li>
+                                <li><a class="dropdown-item" href="#dvr">DVR Systems</a></li>
+                                <li><a class="dropdown-item" href="#nvr">NVR Systems</a></li>
+                                <li><a class="dropdown-item" href="#accessories">Accessories</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">
+                                <i class="fas fa-tools"></i> Services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="areas.html">
+                                <i class="fas fa-map-marker-alt"></i> Areas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="fas fa-info-circle"></i> About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="fas fa-phone-alt"></i> Contact
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link login-btn" href="login.html">
+                                <i class="fas fa-user"></i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cart-btn" href="cart.html">
+                                <i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- ========== HEADER END ========== -->
+
+    <!-- ========== PRODUCTS HERO ========== -->
+    <section class="products-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="mb-3">Our Products Catalog</h1>
+                    <p class="lead">High-quality security products from trusted brands</p>
+                    <div class="search-box mt-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search products...">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== PRODUCTS HERO END ========== -->
+
+    <!-- ========== CATEGORIES SECTION ========== -->
+    <section class="categories-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Product Categories</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4" data-aos="fade-up">
+                    <a href="#cctv" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>CCTV Cameras</h4>
+                        <p>Dome, Bullet, PTZ, IP Cameras</p>
+                    </a>
+                </div>
+
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <a href="#dvr" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                        <h4>DVR Systems</h4>
+                        <p>4CH, 8CH, 16CH, 32CH DVRs</p>
+                    </a>
+                </div>
+
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#nvr" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h4>NVR Systems</h4>
+                        <p>Network Video Recorders</p>
+                    </a>
+                </div>
+
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#accessories" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-cable-car"></i>
+                        </div>
+                        <h4>Accessories</h4>
+                        <p>Cables, Power Supply, Mounts</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== CATEGORIES END ========== -->
+
+    <!-- ========== CCTV CAMERAS SECTION ========== -->
+    <section class="product-section py-5" id="cctv">
+        <div class="container">
+            <div class="section-header mb-5">
+                <h2><i class="fas fa-video me-2"></i> CCTV Cameras</h2>
+                <p class="text-muted">High-resolution security cameras for every need</p>
+            </div>
+
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-md-3 mb-4">
+                    <div class="product-card">
+                        <div class="product-badge">Best Seller</div>
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Dahua Dome Camera">
+                        <div class="card-body">
+                            <h5 class="card-title">Dahua 4MP Dome Camera</h5>
+                            <p class="product-brand">Dahua Technology</p>
+                            <p class="product-description">4MP resolution, Night Vision, Weatherproof</p>
+                            <div class="product-price">
+                                <span class="current-price">Rs 8,500</span>
+                                <span class="old-price">Rs 9,500</span>
+                            </div>
+                            <div class="product-actions mt-3">
+                                <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                                <button class="btn btn-sm btn-outline-primary add-to-cart">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="col-md-3 mb-4">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hikvision Bullet Camera">
+                        <div class="card-body">
+                            <h5 class="card-title">Hikvision 5MP Bullet Camera</h5>
+                            <p class="product-brand">Hikvision</p>
+                            <p class="product-description">5MP, 30m Night Vision, IP67</p>
+                            <div class="product-price">
+                                <span class="current-price">Rs 12,000</span>
+                            </div>
+                            <div class="product-actions mt-3">
+                                <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                                <button class="btn btn-sm btn-outline-primary add-to-cart">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add 6 more CCTV products similarly -->
+
+            </div>
+        </div>
+    </section>
+    <!-- ========== CCTV END ========== -->
+
+    <!-- ========== DVR SYSTEMS SECTION ========== -->
+    <section class="product-section py-5 bg-light" id="dvr">
+        <div class="container">
+            <div class="section-header mb-5">
+                <h2><i class="fas fa-hdd me-2"></i> DVR Systems</h2>
+                <p class="text-muted">Digital Video Recorders for CCTV systems</p>
+            </div>
+
+            <div class="row">
+                <!-- DVR Product 1 -->
+                <div class="col-md-3 mb-4">
+                    <div class="product-card">
+                        <div class="product-badge">Popular</div>
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="4CH DVR">
+                        <div class="card-body">
+                            <h5 class="card-title">4 Channel DVR System</h5>
+                            <p class="product-brand">Dahua</p>
+                            <p class="product-description">4CH, 1TB HDD, Mobile Viewing</p>
+                            <div class="product-price">
+                                <span class="current-price">Rs 15,000</span>
+                            </div>
+                            <div class="product-actions mt-3">
+                                <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                                <button class="btn btn-sm btn-outline-primary add-to-cart">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add 3 more DVR products -->
+
+            </div>
+        </div>
+    </section>
+    <!-- ========== DVR END ========== -->
+
+    <!-- ========== BRANDS SECTION ========== -->
+    <section class="brands-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Trusted Brands</h2>
+            <div class="row align-items-center">
+                <div class="col-md-3 text-center mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-camera fa-3x"></i>
+                        <h4 class="mt-2">Dahua</h4>
+                        <p>Authorized Dealer</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-shield-alt fa-3x"></i>
+                        <h4 class="mt-2">Hikvision</h4>
+                        <p>Authorized Dealer</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-satellite-dish fa-3x"></i>
+                        <h4 class="mt-2">CP Plus</h4>
+                        <p>Available</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-wifi fa-3x"></i>
+                        <h4 class="mt-2">TP-Link</h4>
+                        <p>Networking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== BRANDS END ========== -->
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="cta-section py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">Need Help Choosing Products?</h2>
+            <p class="mb-4">Our experts can help you select the right security system for your needs.</p>
+            <a href="contact.html" class="btn btn-light btn-lg">
+                <i class="fas fa-phone-alt"></i> Contact Our Experts
+            </a>
+        </div>
+    </section>
+    <!-- ========== CTA END ========== -->
+
+    <!-- ========== FOOTER (Same as index.html) ========== -->
+    <footer class="footer bg-dark text-white pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo mb-3">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                        <h3 class="d-inline-block ms-2">RC Technologies</h3>
+                    </div>
+                    <p>Your trusted partner for security solutions in Karachi.</p>
+                    <div class="footer-contact mt-4">
+                        <p><i class="fas fa-map-marker-alt"></i> Shop # 123, Main Road, Karachi</p>
+                        <p><i class="fas fa-phone"></i> 021-1234567</p>
+                        <p><i class="fab fa-whatsapp"></i> 0300-1234567</p>
+                        <p><i class="fas fa-envelope"></i> info@rctechnologies.pk</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="products.html" class="text-white-50">Products</a></li>
+                        <li class="mb-2"><a href="services.html" class="text-white-50">Services</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50">About Us</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Our Products</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#cctv" class="text-white-50">CCTV Cameras</a></li>
+                        <li class="mb-2"><a href="#dvr" class="text-white-50">DVR Systems</a></li>
+                        <li class="mb-2"><a href="#nvr" class="text-white-50">NVR Systems</a></li>
+                        <li class="mb-2"><a href="#accessories" class="text-white-50">Accessories</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe for updates and offers</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="bg-light">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2023 <strong>RC Technologies</strong>. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> for Karachi</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ========== FOOTER END ========== -->
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        AOS.init();
+
+        // Add to Cart Functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                let cartCount = document.querySelector('.cart-count');
+                let currentCount = parseInt(cartCount.textContent);
+                cartCount.textContent = currentCount + 1;
+
+                // Show notification
+                alert('Product added to cart!');
+            });
+        });
+    </script>
+</body>
+
+</html>

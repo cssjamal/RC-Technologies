@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - RC Technologies</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js for Statistics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- DataTables for Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <style>
+         :root {
+            --admin-sidebar: #1a1a2e;
+            --admin-primary: #ff416c;
+            --admin-secondary: #16213e;
+            --admin-light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        /* Sidebar */
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 250px;
+            background: var(--admin-sidebar);
+            color: white;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background: var(--admin-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .sidebar-header span {
+            color: var(--admin-primary);
+            font-weight: 700;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--admin-primary);
+            color: white;
+            border-left: 4px solid white;
+        }
+        
+        .sidebar-menu i {
+            width: 25px;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .sidebar-menu .badge {
+            margin-left: auto;
+            background: var(--admin-primary);
+        }
+        /* Main Content */
+        
+        .main-content {
+            margin-left: 250px;
+            transition: all 0.3s;
+        }
+        
+        .top-bar {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-box {
+            width: 300px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--admin-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        /* Content Area */
+        
+        .content-area {
+            padding: 30px;
+        }
+        /* Stats Cards */
+        
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .icon-orders {
+            background: #ff416c;
+        }
+        
+        .icon-revenue {
+            background: #36a2eb;
+        }
+        
+        .icon-products {
+            background: #4cc0c0;
+        }
+        
+        .icon-customers {
+            background: #ff9f40;
+        }
+        
+        .stats-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            color: #666;
+            font-size: 14px;
+        }
+        /* Tables */
+        
+        .data-table {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .table th {
+            background: var(--admin-secondary);
+            color: white;
+            border: none;
+        }
+        
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .status-processing {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .status-completed {
+            background: #28a745;
+            color: white;
+        }
+        
+        .status-cancelled {
+            background: #dc3545;
+            color: white;
+        }
+        /* Quick Actions */
+        
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            padding: 12px 25px;
+            background: var(--admin-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .action-btn:hover {
+            background: #e03a5f;
+            transform: translateY(-2px);
+        }
+        /* Charts */
+        
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            height: 400px;
+        }
+        /* Modal for Add Product */
+        
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        
+        .modal-header {
+            background: var(--admin-primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border: none;
+        }
+        /* Mobile Responsive */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            .sidebar.active {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><span>RC</span> Admin</h3>
+            <small>Control Panel</small>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="#" class="active" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('orders')">
+                        <i class="fas fa-shopping-bag"></i> Orders <span class="badge">15</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('products')">
+                        <i class="fas fa-box"></i> Products
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('customers')">
+                        <i class="fas fa-users"></i> Customers <span class="badge">42</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('inventory')">
+                        <i class="fas fa-warehouse"></i> Inventory
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('analytics')">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('messages')">
+                        <i class="fas fa-comments"></i> Messages <span class="badge">3</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-primary me-3 d-lg-none" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h4 class="mb-0" id="pageTitle">Admin Dashboard</h4>
+            </div>
+
+            <div class="search-box">
+                <input type="text" class="form-control" placeholder="Search...">
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar">AD</div>
+                <div>
+                    <h6 class="mb-0">Admin User</h6>
+                    <small class="text-muted">Super Admin</small>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Section (Default) -->
+            <div id="dashboardSection" class="section-content">
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                        <i class="fas fa-plus"></i> Add New Product
+                    </button>
+                    <button class="action-btn" onclick="showSection('orders')">
+                        <i class="fas fa-eye"></i> View Orders
+                    </button>
+                    <button class="action-btn" onclick="showSection('messages')">
+                        <i class="fas fa-comment"></i> Check Messages
+                    </button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon icon-orders">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="stats-number">15</div>
+                            <div class="stats-label">Today's Orders</div>
+                            <small class="text-success">+2 from yesterday</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon icon-revenue">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="stats-number">Rs 1,25,000</div>
+                            <div class="stats-label">Today's Revenue</div>
+                            <small class="text-success">+15% from yesterday</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon icon-products">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stats-number">48</div>
+                            <div class="stats-label">Total Products</div>
+                            <small class="text-success">5 low in stock</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="stats-icon icon-customers">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stats-number">42</div>
+                            <div class="stats-label">Total Customers</div>
+                            <small class="text-success">+3 new today</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Table -->
+                <div class="data-table">
+                    <h5>Recent Orders</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#RC20231201</td>
+                                    <td>Ali Khan</td>
+                                    <td>Rs 25,000</td>
+                                    <td><span class="status-badge status-processing">Processing</span></td>
+                                    <td>01 Dec 2023</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                        <button class="btn btn-sm btn-outline-success">Update</button>
+                                    </td>
+                                </tr>
+                                <!-- More rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="ordersSection" class="section-content" style="display: none;">
+                <h3>Order Management</h3>
+                <!-- Order management content -->
+            </div>
+
+            <!-- Products Section -->
+            <div id="productsSection" class="section-content" style="display: none;">
+                <h3>Product Management</h3>
+                <!-- Product management content -->
+            </div>
+
+            <!-- Customers Section -->
+            <div id="customersSection" class="section-content" style="display: none;">
+                <h3>Customer Management</h3>
+                <!-- Customer management content -->
+            </div>
+
+            <!-- Inventory Section -->
+            <div id="inventorySection" class="section-content" style="display: none;">
+                <h3>Inventory Management</h3>
+                <!-- Inventory management content -->
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analyticsSection" class="section-content" style="display: none;">
+                <h3>Sales Analytics</h3>
+                <!-- Analytics content -->
+            </div>
+
+            <!-- Messages Section -->
+            <div id="messagesSection" class="section-content" style="display: none;">
+                <h3>Customer Messages</h3>
+                <!-- Messages content -->
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settingsSection" class="section-content" style="display: none;">
+                <h3>System Settings</h3>
+                <!-- Settings content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Product</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Product Name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Brand</label>
+                                    <select class="form-control">
+                                        <option>Dahua</option>
+                                        <option>Hikvision</option>
+                                        <option>CP Plus</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label>Price (Rs)</label>
+                                    <input type="number" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label>Stock Quantity</label>
+                                    <input type="number" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label>Category</label>
+                                    <select class="form-control">
+                                        <option>CCTV Camera</option>
+                                        <option>DVR System</option>
+                                        <option>NVR System</option>
+                                        <option>Accessories</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Description</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Upload Images</label>
+                            <input type="file" class="form-control" multiple>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="addProductForm" class="btn btn-primary">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        // Toggle Sidebar on Mobile
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Show/Hide Sections
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Remove active class from all menu items
+            document.querySelectorAll('.sidebar-menu a').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionName + 'Section').style.display = 'block';
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Admin Dashboard',
+                'orders': 'Order Management',
+                'products': 'Product Management',
+                'customers': 'Customer Management',
+                'inventory': 'Inventory Management',
+                'analytics': 'Sales Analytics',
+                'messages': 'Customer Messages',
+                'settings': 'System Settings'
+            };
+            document.getElementById('pageTitle').textContent = titles[sectionName];
+
+            // Add active class to clicked menu item
+            event.target.closest('a').classList.add('active');
+
+            // Close sidebar on mobile
+            if (window.innerWidth < 768) {
+                toggleSidebar();
+            }
+        }
+
+        // Initialize DataTable
+        $(document).ready(function() {
+            $('.table').DataTable({
+                pageLength: 10,
+                responsive: true
+            });
+        });
+
+        // Chart.js Implementation
+        const ctx = document.createElement('canvas');
+        document.getElementById('analyticsSection').appendChild(ctx);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales (Rs)',
+                    data: [50000, 75000, 60000, 90000, 110000, 95000],
+                    borderColor: '#ff416c',
+                    backgroundColor: 'rgba(255, 65, 108, 0.1)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>

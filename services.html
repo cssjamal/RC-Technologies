@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Services - RC Technologies Karachi</title>
+
+    <!-- Same CSS files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Services Page CSS -->
+    <style>
+        .services-container {
+            padding-top: 120px;
+            padding-bottom: 50px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .services-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .services-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.2);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 15px 0;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .service-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-features i {
+            color: var(--secondary-color);
+            width: 20px;
+        }
+        
+        .booking-form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .step.active .step-number {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .process-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        
+        .timeline-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+        
+        .pricing-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+        
+        .pricing-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .pricing-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-row:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .why-choose {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .why-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .why-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .booking-form-container {
+                padding: 20px;
+            }
+            .step-indicator {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Same Header -->
+    <header>
+        <!-- Header code same as before -->
+    </header>
+
+    <!-- ========== SERVICES PAGE ========== -->
+    <div class="services-container">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="services-hero">
+                <h1>Professional CCTV Installation</h1>
+                <p class="lead">Expert Installation Services Across Karachi</p>
+                <div class="mt-4">
+                    <button class="btn btn-light btn-lg" onclick="startBooking()">
+                        <i class="fas fa-calendar-check"></i> Book Installation Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <h2 class="text-center mb-4">Our Installation Packages</h2>
+            <div class="services-grid">
+                <!-- Basic Package -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Basic Installation">
+                    </div>
+                    <div class="service-content">
+                        <div class="badge bg-primary">Most Popular</div>
+                        <h3 class="mt-3">Basic Installation</h3>
+                        <p>Perfect for homes and small offices</p>
+                        <div class="service-price">Starting from Rs 2,000</div>
+
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> 2-4 Camera Setup</li>
+                            <li><i class="fas fa-check"></i> DVR/NVR Installation</li>
+                            <li><i class="fas fa-check"></i> Basic Cable Management</li>
+                            <li><i class="fas fa-check"></i> Mobile App Setup</li>
+                            <li><i class="fas fa-check"></i> 6 Months Support</li>
+                        </ul>
+
+                        <button class="btn btn-primary w-100" onclick="selectPackage('basic')">
+                            <i class="fas fa-shopping-cart"></i> Select This Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Professional Package -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professional Installation">
+                    </div>
+                    <div class="service-content">
+                        <div class="badge bg-warning">Best Value</div>
+                        <h3 class="mt-3">Professional Package</h3>
+                        <p>Complete solution for medium businesses</p>
+                        <div class="service-price">Starting from Rs 5,000</div>
+
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> 4-8 Camera Setup</li>
+                            <li><i class="fas fa-check"></i> Advanced DVR/NVR</li>
+                            <li><i class="fas fa-check"></i> Professional Wiring</li>
+                            <li><i class="fas fa-check"></i> Remote Viewing Setup</li>
+                            <li><i class="fas fa-check"></i> 1 Year Warranty</li>
+                            <li><i class="fas fa-check"></i> Free Maintenance (3 Months)</li>
+                        </ul>
+
+                        <button class="btn btn-primary w-100" onclick="selectPackage('professional')">
+                            <i class="fas fa-shopping-cart"></i> Select This Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Enterprise Package -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Enterprise Installation">
+                    </div>
+                    <div class="service-content">
+                        <div class="badge bg-success">Premium</div>
+                        <h3 class="mt-3">Enterprise Solution</h3>
+                        <p>Advanced security for large premises</p>
+                        <div class="service-price">Starting from Rs 15,000</div>
+
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> 8-16+ Camera Setup</li>
+                            <li><i class="fas fa-check"></i> Enterprise NVR System</li>
+                            <li><i class="fas fa-check"></i> Network Integration</li>
+                            <li><i class="fas fa-check"></i> 24/7 Monitoring Setup</li>
+                            <li><i class="fas fa-check"></i> 2 Years Warranty</li>
+                            <li><i class="fas fa-check"></i> Priority Support</li>
+                            <li><i class="fas fa-check"></i> Quarterly Maintenance</li>
+                        </ul>
+
+                        <button class="btn btn-primary w-100" onclick="selectPackage('enterprise')">
+                            <i class="fas fa-shopping-cart"></i> Select This Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="booking-form-container" id="bookingForm" style="display: none;">
+                <h3 class="text-center mb-4">Book Installation Service</h3>
+
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step active" id="step1Indicator">
+                        <div class="step-number">1</div>
+                        <span>Select Package</span>
+                    </div>
+                    <div class="step" id="step2Indicator">
+                        <div class="step-number">2</div>
+                        <span>Details</span>
+                    </div>
+                    <div class="step" id="step3Indicator">
+                        <div class="step-number">3</div>
+                        <span>Schedule</span>
+                    </div>
+                    <div class="step" id="step4Indicator">
+                        <div class="step-number">4</div>
+                        <span>Confirm</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Package Selection -->
+                <div class="form-step active" id="step1">
+                    <h4>Select Installation Package</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="package-option" onclick="selectPackage('basic')">
+                                <h5>Basic</h5>
+                                <div class="service-price">Rs 2,000</div>
+                                <ul class="service-features">
+                                    <li>2-4 Cameras</li>
+                                    <li>Basic Setup</li>
+                                    <li>6 Months Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Add other packages -->
+                    </div>
+                    <button class="btn btn-primary mt-4" onclick="nextStep(2)">Next</button>
+                </div>
+
+                <!-- Step 2: Customer Details -->
+                <div class="form-step" id="step2">
+                    <!-- Form for details -->
+                    <button class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                </div>
+
+                <!-- Continue with other steps -->
+            </div>
+
+            <!-- Installation Process -->
+            <div class="process-timeline">
+                <h2 class="text-center mb-5">Our Installation Process</h2>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h4>Free Site Survey</h4>
+                        <p>Our expert visits your location, assesses security needs, and provides a customized plan with quotation.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h4>Equipment Selection</h4>
+                        <p>Choose from our range of Dahua and Hikvision products based on your requirements and budget.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h4>Professional Installation</h4>
+                        <p>Our certified technicians install cameras, DVR/NVR systems with proper cable management and setup.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h4>Testing & Training</h4>
+                        <p>Complete system testing, mobile app setup, and user training for optimal operation.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h4>After-Sales Support</h4>
+                        <p>24/7 technical support, regular maintenance, and warranty services for peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Table -->
+            <div class="pricing-table">
+                <div class="pricing-header">
+                    <h3 class="mb-0">Installation Pricing</h3>
+                    <p>Transparent pricing for Karachi customers</p>
+                </div>
+
+                <div class="pricing-row">
+                    <span>Residential Installation (2-4 Cameras)</span>
+                    <span><strong>Rs 2,000 - 4,000</strong></span>
+                </div>
+
+                <div class="pricing-row">
+                    <span>Commercial Installation (4-8 Cameras)</span>
+                    <span><strong>Rs 5,000 - 10,000</strong></span>
+                </div>
+
+                <div class="pricing-row">
+                    <span>Enterprise Installation (8+ Cameras)</span>
+                    <span><strong>Rs 15,000+</strong></span>
+                </div>
+
+                <div class="pricing-row">
+                    <span>Additional Camera Installation</span>
+                    <span><strong>Rs 500 per camera</strong></span>
+                </div>
+
+                <div class="pricing-row">
+                    <span>DVR/NVR System Setup</span>
+                    <span><strong>Rs 1,500 - 3,000</strong></span>
+                </div>
+
+                <div class="pricing-row">
+                    <span>Mobile App Configuration</span>
+                    <span><strong>Rs 500</strong></span>
+                </div>
+
+                <div class="pricing-row">
+                    <span>Emergency Service Call</span>
+                    <span><strong>Rs 1,000</strong></span>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="why-choose">
+                <h2 class="text-center mb-5">Why Choose RC Technologies?</h2>
+
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h4>Certified Technicians</h4>
+                        <p>Our team holds Dahua and Hikvision certifications with 5+ years experience.</p>
+                    </div>
+                </div>
+
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h4>Same Day Service</h4>
+                        <p>Installation within 24 hours for urgent requirements across Karachi.</p>
+                    </div>
+                </div>
+
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Warranty & Support</h4>
+                        <p>1 year warranty on installation work and 24/7 technical support.</p>
+                    </div>
+                </div>
+
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div>
+                        <h4>Genuine Equipment</h4>
+                        <p>We use only original Dahua and Hikvision products with warranty.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center mt-5">
+                <h3>Ready to Secure Your Property?</h3>
+                <p class="lead mb-4">Contact us today for free consultation and site survey</p>
+                <a href="contact.html" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-phone-alt"></i> 021-1234567
+                </a>
+                <button class="btn btn-outline-light btn-lg" onclick="startBooking()">
+                    <i class="fas fa-calendar-check"></i> Book Online
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ========== SERVICES END ========== -->
+
+    <!-- Same Footer -->
+    <footer class="footer bg-dark text-white pt-5">
+        <!-- Same footer code -->
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let selectedPackage = '';
+        let bookingStep = 1;
+
+        // Start Booking Process
+        function startBooking() {
+            document.getElementById('bookingForm').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('bookingForm').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+
+        // Select Package
+        function selectPackage(packageType) {
+            selectedPackage = packageType;
+            document.querySelectorAll('.package-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.closest('.package-option').classList.add('selected');
+        }
+
+        // Step Navigation
+        function nextStep(step) {
+            // Hide current step
+            document.getElementById(`step${bookingStep}`).classList.remove('active');
+            document.getElementById(`step${bookingStep}Indicator`).classList.remove('active');
+
+            // Show next step
+            bookingStep = step;
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById(`step${step}Indicator`).classList.add('active');
+
+            // Mark previous steps as completed
+            for (let i = 1; i < step; i++) {
+                document.getElementById(`step${i}Indicator`).classList.add('completed');
+            }
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${bookingStep}`).classList.remove('active');
+            document.getElementById(`step${bookingStep}Indicator`).classList.remove('active');
+
+            bookingStep = step;
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById(`step${step}Indicator`).classList.add('active');
+        }
+
+        // Submit Booking
+        function submitBooking() {
+            if (!selectedPackage) {
+                alert('Please select a package');
+                return;
+            }
+
+            alert(`Booking confirmed for ${selectedPackage} package! Our team will contact you within 2 hours.`);
+            document.getElementById('bookingForm').style.display = 'none';
+            bookingStep = 1;
+            selectedPackage = '';
+
+            // Reset steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            document.getElementById('step1Indicator').classList.add('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for package selection
+            document.querySelectorAll('.package-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    selectPackage(this.querySelector('h5').textContent.toLowerCase());
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

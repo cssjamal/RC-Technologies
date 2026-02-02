@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Areas - RC Technologies Karachi</title>
+
+    <!-- Same CSS files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Areas Page CSS -->
+    <style>
+        .areas-container {
+            padding-top: 120px;
+            padding-bottom: 50px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .areas-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .areas-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .areas-search {
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 15px 50px 15px 20px;
+            border-radius: 50px;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .coverage-map {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .map-container {
+            position: relative;
+            height: 500px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .map-area {
+            position: absolute;
+            border: 2px solid var(--accent-color);
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .map-area:hover {
+            background: rgba(231, 76, 60, 0.2);
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .area-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .area-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .area-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .status-available {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-limited {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .area-features {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        
+        .area-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .area-features i {
+            color: var(--secondary-color);
+        }
+        
+        .delivery-info {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+        
+        .area-checker {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        
+        .checker-form {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .checker-form input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .checker-form button {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .check-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .result-available {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-not-available {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        @media (max-width: 768px) {
+            .areas-hero h1 {
+                font-size: 2.5rem;
+            }
+            .map-container {
+                height: 400px;
+            }
+            .checker-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Same Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contact-info">
+                            <span><i class="fas fa-phone-alt"></i> 021-1234567</span>
+                            <span class="ms-3"><i class="fab fa-whatsapp"></i> 0300-1234567</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-twinter"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <div class="logo-container">
+                        <i class="fas fa-shield-alt logo-icon"></i>
+                        <span class="logo-text">
+                            <strong>RC</strong> Technologies
+                        </span>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">
+                                <i class="fas fa-camera"></i> Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="areas.html">
+                                <i class="fas fa-map-marker-alt"></i> Areas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="support.html">
+                                <i class="fas fa-headset"></i> Support
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                                <span class="badge bg-danger">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link login-btn" href="login.html">
+                                <i class="fas fa-user"></i> Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========== SERVICE AREAS ========== -->
+    <div class="areas-container">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="areas-hero">
+                <h1>Service Areas in Karachi</h1>
+                <p class="lead">Professional CCTV Installation Services Across Karachi</p>
+
+                <div class="areas-search">
+                    <div class="search-box">
+                        <input type="text" id="areaSearch" placeholder="Search your area in Karachi...">
+                        <button onclick="searchArea()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coverage Map -->
+            <div class="coverage-map">
+                <h2 class="mb-4">Our Coverage Map</h2>
+                <p class="text-muted mb-4">Click on any area to see service details</p>
+
+                <div class="map-container" id="karachiMap">
+                    <!-- Map areas will be created by JavaScript -->
+                </div>
+
+                <div class="text-center">
+                    <div class="d-inline-flex gap-4">
+                        <div><span style="display:inline-block;width:15px;height:15px;background:rgba(52,152,219,0.3);border:2px solid var(--accent-color);margin-right:8px;"></span> Available</div>
+                        <div><span style="display:inline-block;width:15px;height:15px;background:rgba(255,193,7,0.3);border:2px solid #ffc107;margin-right:8px;"></span> Limited Service</div>
+                        <div><span style="display:inline-block;width:15px;height:15px;background:rgba(108,117,125,0.3);border:2px solid #6c757d;margin-right:8px;"></span> Coming Soon</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area Checker -->
+            <div class="area-checker">
+                <h3 class="mb-3">Check Service Availability</h3>
+                <p>Enter your area to check if we provide installation services there</p>
+
+                <div class="checker-form">
+                    <input type="text" id="checkAreaInput" placeholder="Enter your area (e.g., Gulshan)">
+                    <button onclick="checkAreaAvailability()">Check Now</button>
+                </div>
+
+                <div class="check-result" id="checkResult">
+                    <!-- Result will appear here -->
+                </div>
+            </div>
+
+            <!-- All Areas Grid -->
+            <h2 class="mt-5 mb-4">All Service Areas</h2>
+            <div class="areas-grid" id="areasGrid">
+                <!-- Area cards will be generated by JavaScript -->
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="delivery-info">
+                <h3 class="text-white mb-4"><i class="fas fa-shipping-fast"></i> Delivery & Installation Information</h3>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-white">Free Delivery Areas</h5>
+                        <ul class="text-white">
+                            <li>Gulshan-e-Iqbal</li>
+                            <li>North Nazimabad</li>
+                            <li>Gulistan-e-Johar</li>
+                            <li>Malir</li>
+                            <li>Korangi</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="text-white">Delivery Charges Apply</h5>
+                        <ul class="text-white">
+                            <li>DHA Phase 1-8: Rs 500</li>
+                            <li>Clifton: Rs 500</li>
+                            <li>Bahria Town: Rs 800</li>
+                            <li>Surrounding Areas: Rs 300-1000</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Information -->
+            <div class="info-boxes">
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h5>Professional Installation</h5>
+                    <p>Expert technicians with 5+ years experience</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h5>Same Day Service</h5>
+                    <p>Installation within 24 hours in most areas</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5>1 Year Warranty</h5>
+                    <p>On installation work and labor</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h5>24/7 Support</h5>
+                    <p>Technical support available round the clock</p>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center mt-5">
+                <h3>Ready to Secure Your Property?</h3>
+                <p class="lead mb-4">Get free consultation and site survey for your location</p>
+                <a href="contact.html" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-phone-alt"></i> Book Free Survey
+                </a>
+                <a href="products.html" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-shopping-cart"></i> View Products
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ========== AREAS END ========== -->
+
+    <!-- Same Footer -->
+    <footer class="footer bg-dark text-white pt-5">
+        <!-- Same footer code -->
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Karachi Areas Data
+        const karachiAreas = [{
+            name: "Gulshan-e-Iqbal",
+            status: "available",
+            delivery: "Free",
+            installation: "Rs 2,000+",
+            response: "2-4 hours",
+            features: ["Same Day Service", "Free Survey", "Expert Technicians"],
+            coordinates: {
+                top: "30%",
+                left: "40%",
+                width: "15%",
+                height: "12%"
+            }
+        }, {
+            name: "North Nazimabad",
+            status: "available",
+            delivery: "Free",
+            installation: "Rs 1,800+",
+            response: "3-5 hours",
+            features: ["Free Installation Guide", "Warranty Included"],
+            coordinates: {
+                top: "35%",
+                left: "30%",
+                width: "12%",
+                height: "10%"
+            }
+        }, {
+            name: "Gulistan-e-Johar",
+            status: "available",
+            delivery: "Free",
+            installation: "Rs 2,200+",
+            response: "4-6 hours",
+            features: ["24/7 Support", "Emergency Services"],
+            coordinates: {
+                top: "25%",
+                left: "45%",
+                width: "14%",
+                height: "11%"
+            }
+        }, {
+            name: "DHA Phase 1-8",
+            status: "available",
+            delivery: "Rs 500",
+            installation: "Rs 3,000+",
+            response: "4-8 hours",
+            features: ["Premium Service", "Advanced Setup"],
+            coordinates: {
+                top: "60%",
+                left: "50%",
+                width: "18%",
+                height: "15%"
+            }
+        }, {
+            name: "Clifton",
+            status: "available",
+            delivery: "Rs 500",
+            installation: "Rs 2,800+",
+            response: "3-6 hours",
+            features: ["Commercial Installations", "Bulk Discounts"],
+            coordinates: {
+                top: "65%",
+                left: "45%",
+                width: "15%",
+                height: "12%"
+            }
+        }, {
+            name: "Malir",
+            status: "available",
+            delivery: "Free",
+            installation: "Rs 1,500+",
+            response: "5-7 hours",
+            features: ["Affordable Packages", "Flexible Timings"],
+            coordinates: {
+                top: "50%",
+                left: "60%",
+                width: "16%",
+                height: "13%"
+            }
+        }, {
+            name: "Korangi",
+            status: "available",
+            delivery: "Free",
+            installation: "Rs 1,600+",
+            response: "4-6 hours",
+            features: ["Industrial CCTV", "Custom Solutions"],
+            coordinates: {
+                top: "55%",
+                left: "65%",
+                width: "14%",
+                height: "11%"
+            }
+        }, {
+            name: "Saddar",
+            status: "limited",
+            delivery: "Rs 300",
+            installation: "Rs 2,500+",
+            response: "6-8 hours",
+            features: ["Business Solutions", "Monthly Maintenance"],
+            coordinates: {
+                top: "70%",
+                left: "40%",
+                width: "12%",
+                height: "10%"
+            }
+        }, {
+            name: "Bahria Town",
+            status: "limited",
+            delivery: "Rs 800",
+            installation: "Rs 3,500+",
+            response: "1-2 days",
+            features: ["Luxury Installations", "Smart Home Integration"],
+            coordinates: {
+                top: "20%",
+                left: "60%",
+                width: "20%",
+                height: "16%"
+            }
+        }];
+
+        // Available areas (for checking)
+        const availableAreas = [
+            "gulshan", "nazimabad", "dha", "clifton", "malir", "korangi",
+            "saddar", "johar", "bahria", "defence", "gulistan", "north"
+        ];
+
+        // Initialize Map and Areas
+        document.addEventListener('DOMContentLoaded', function() {
+            createMap();
+            generateAreaCards();
+        });
+
+        // Create Karachi Map
+        function createMap() {
+            const mapContainer = document.getElementById('karachiMap');
+
+            karachiAreas.forEach(area => {
+                const areaDiv = document.createElement('div');
+                areaDiv.className = 'map-area';
+                areaDiv.textContent = area.name;
+                areaDiv.style.top = area.coordinates.top;
+                areaDiv.style.left = area.coordinates.left;
+                areaDiv.style.width = area.coordinates.width;
+                areaDiv.style.height = area.coordinates.height;
+
+                // Set color based on status
+                if (area.status === 'available') {
+                    areaDiv.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+                    areaDiv.style.borderColor = 'var(--accent-color)';
+                } else if (area.status === 'limited') {
+                    areaDiv.style.backgroundColor = 'rgba(255, 193, 7, 0.1)';
+                    areaDiv.style.borderColor = '#ffc107';
+                }
+
+                // Add click event
+                areaDiv.addEventListener('click', function() {
+                    showAreaDetails(area);
+                });
+
+                mapContainer.appendChild(areaDiv);
+            });
+        }
+
+        // Generate Area Cards
+        function generateAreaCards() {
+            const areasGrid = document.getElementById('areasGrid');
+            areasGrid.innerHTML = '';
+
+            karachiAreas.forEach(area => {
+                        const card = document.createElement('div');
+                        card.className = 'area-card';
+                        card.innerHTML = `
+                    <div class="area-status status-${area.status}">
+                        ${area.status === 'available' ? '✓ Available' : '⚠ Limited Service'}
+                    </div>
+                    <h4>${area.name}</h4>
+                    <div class="mb-3">
+                        <strong>Delivery:</strong> ${area.delivery}<br>
+                        <strong>Installation:</strong> ${area.installation}<br>
+                        <strong>Response Time:</strong> ${area.response}
+                    </div>
+                    <ul class="area-features">
+                        ${area.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                    </ul>
+                    <button class="btn btn-sm btn-primary mt-3" onclick="showAreaDetails(${JSON.stringify(area).replace(/"/g, '&quot;')})">
+                        View Details
+                    </button>
+                `;
+                
+                areasGrid.appendChild(card);
+            });
+        }
+        
+        // Show Area Details
+        function showAreaDetails(area) {
+            const featuresHTML = area.features.map(f => `<li>${f}</li>`).join('');
+            
+            const detailsHTML = `
+                <div style="padding: 20px; background: white; border-radius: 10px; max-width: 500px; margin: 0 auto;">
+                    <h3>${area.name}</h3>
+                    <div class="mb-3">
+                        <p><strong>Service Status:</strong> <span class="badge bg-${area.status === 'available' ? 'success' : 'warning'}">
+                            ${area.status === 'available' ? 'Fully Available' : 'Limited Service'}
+                        </span></p>
+                        <p><strong>Delivery Charges:</strong> ${area.delivery}</p>
+                        <p><strong>Installation Cost:</strong> ${area.installation}</p>
+                        <p><strong>Average Response Time:</strong> ${area.response}</p>
+                    </div>
+                    <h5>Services Included:</h5>
+                    <ul>${featuresHTML}</ul>
+                    <div class="mt-4">
+                        <button class="btn btn-primary" onclick="bookInstallation('${area.name}')">
+                            <i class="fas fa-calendar-check"></i> Book Installation
+                        </button>
+                        <button class="btn btn-outline-primary ms-2" onclick="checkArea('${area.name}')">
+                            Check Availability
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            alert(detailsHTML.replace(/<[^>]*>/g, ''));
+        }
+        
+        // Search Area
+        function searchArea() {
+            const searchTerm = document.getElementById('areaSearch').value.toLowerCase();
+            if (!searchTerm) return;
+            
+            const foundArea = karachiAreas.find(area => 
+                area.name.toLowerCase().includes(searchTerm)
+            );
+            
+            if (foundArea) {
+                showAreaDetails(foundArea);
+                // Highlight on map (simulate)
+                document.querySelectorAll('.map-area').forEach(area => {
+                    if (area.textContent === foundArea.name) {
+                        area.style.animation = 'pulse 1s 3';
+                        setTimeout(() => {
+                            area.style.animation = '';
+                        }, 3000);
+                    }
+                });
+            } else {
+                alert(`We don't currently serve "${searchTerm}". Please check nearby areas or contact us for special arrangements.`);
+            }
+        }
+        
+        // Check Area Availability
+        function checkAreaAvailability() {
+            const input = document.getElementById('checkAreaInput').value.toLowerCase();
+            const resultDiv = document.getElementById('checkResult');
+            
+            if (!input) {
+                alert('Please enter an area name');
+                return;
+            }
+            
+            // Check if area is available
+            const isAvailable = availableAreas.some(area => 
+                input.includes(area) || area.includes(input)
+            );
+            
+            if (isAvailable) {
+                resultDiv.className = 'check-result result-available';
+                resultDiv.innerHTML = `
+                    <h5><i class="fas fa-check-circle"></i> Service Available!</h5>
+                    <p>We provide CCTV installation services in <strong>${input.toUpperCase()}</strong>.</p>
+                    <button class="btn btn-sm btn-success" onclick="bookInstallation('${input}')">
+                        Book Installation
+                    </button>
+                `;
+            } else {
+                resultDiv.className = 'check-result result-not-available';
+                resultDiv.innerHTML = `
+                    <h5><i class="fas fa-times-circle"></i> Service Not Currently Available</h5>
+                    <p>We don't currently serve <strong>${input.toUpperCase()}</strong>.</p>
+                    <p>Please check nearby areas or <a href="support.html">contact us</a> for special arrangements.</p>
+                `;
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+        
+        // Book Installation
+        function bookInstallation(areaName) {
+            localStorage.setItem('selectedArea', areaName);
+            window.location.href = 'contact.html?service=installation';
+        }
+        
+        // Area Check Shortcut
+        function checkArea(areaName) {
+            document.getElementById('checkAreaInput').value = areaName;
+            checkAreaAvailability();
+        }
+        
+        // Handle Enter key in search
+        document.getElementById('areaSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') searchArea();
+        });
+        
+        document.getElementById('checkAreaInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkAreaAvailability();
+        });
+    </script>
+</body>
+
+</html>

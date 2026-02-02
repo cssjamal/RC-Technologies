@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - RC Technologies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .admin-login-box {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .admin-login-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+        }
+        
+        .admin-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .admin-logo i {
+            font-size: 48px;
+            color: #ff416c;
+            margin-bottom: 15px;
+        }
+        
+        .admin-logo h1 {
+            color: #333;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .admin-logo span {
+            color: #666;
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #ff416c;
+            box-shadow: 0 0 0 3px rgba(255, 65, 108, 0.1);
+            outline: none;
+        }
+        
+        .btn-admin-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-admin-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+        }
+        
+        .security-note {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #ff416c;
+        }
+        
+        .security-note p {
+            color: #666;
+            font-size: 12px;
+            margin: 0;
+        }
+        
+        .back-to-site {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-to-site a {
+            color: #ff416c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .error-message {
+            color: #ff416c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-login-box">
+        <div class="admin-logo">
+            <i class="fas fa-shield-alt"></i>
+            <h1>RC Technologies</h1>
+            <span>Admin Control Panel</span>
+        </div>
+
+        <form id="adminLoginForm">
+            <div class="form-group">
+                <label for="adminUsername"><i class="fas fa-user-shield"></i> Admin Username</label>
+                <input type="text" class="form-control" id="adminUsername" placeholder="Enter admin username" required>
+                <div class="error-message" id="usernameError">Invalid username</div>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPassword"><i class="fas fa-key"></i> Password</label>
+                <input type="password" class="form-control" id="adminPassword" placeholder="Enter admin password" required>
+                <div class="error-message" id="passwordError">Invalid password</div>
+            </div>
+
+            <div class="form-group">
+                <label for="securityCode"><i class="fas fa-lock"></i> Security Code</label>
+                <input type="text" class="form-control" id="securityCode" placeholder="Enter security code" required>
+                <div class="error-message" id="codeError">Invalid security code</div>
+            </div>
+
+            <button type="submit" class="btn-admin-login">
+                <i class="fas fa-sign-in-alt"></i> Access Admin Panel
+            </button>
+        </form>
+
+        <div class="security-note">
+            <p><i class="fas fa-exclamation-triangle"></i> Restricted Access. Unauthorized entry is prohibited and monitored.</p>
+        </div>
+
+        <div class="back-to-site">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Main Website</a>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        // Admin Login with Multiple Security Layers
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            const securityCode = document.getElementById('securityCode').value;
+
+            // Hide all errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+
+            // Default credentials (In real system, ye database se aayenge)
+            const validCredentials = {
+                username: 'admin',
+                password: 'RCTech@2023',
+                securityCode: 'RC123'
+            };
+
+            let isValid = true;
+
+            // Check username
+            if (username !== validCredentials.username) {
+                document.getElementById('usernameError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Check password
+            if (password !== validCredentials.password) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Check security code
+            if (securityCode !== validCredentials.securityCode) {
+                document.getElementById('codeError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Successful login
+                alert('✓ Admin Access Granted! Redirecting to Dashboard...');
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                // Failed login attempt
+                alert('✗ Access Denied! Invalid credentials.');
+            }
+        });
+
+        // Clear errors on input
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('input', function() {
+                document.querySelectorAll('.error-message').forEach(error => {
+                    error.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

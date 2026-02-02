@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RC Technologies Karachi</title>
+
+    <!-- Same CSS files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .about-container {
+            padding-top: 120px;
+            padding-bottom: 50px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .about-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .mission-card,
+        .vision-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--secondary-color);
+        }
+        
+        .mission-card {
+            border-top-color: var(--primary-color);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .team-section {
+            margin: 60px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 25px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .team-social a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .team-social a:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 80px 0;
+            border-radius: 15px;
+            margin: 60px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .story-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        
+        .timeline-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .certifications {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 50px 0;
+        }
+        
+        .cert-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .cert-logo img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Same Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contact-info">
+                            <span><i class="fas fa-phone-alt"></i> 021-1234567</span>
+                            <span class="ms-3"><i class="fab fa-whatsapp"></i> 0300-1234567</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <div class="logo-container">
+                        <i class="fas fa-shield-alt logo-icon"></i>
+                        <span class="logo-text">
+                            <strong>RC</strong> Technologies
+                        </span>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">
+                                <i class="fas fa-camera"></i> Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">
+                                <i class="fas fa-tools"></i> Services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about.html">
+                                <i class="fas fa-info-circle"></i> About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="fas fa-phone-alt"></i> Contact
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link login-btn" href="login.html">
+                                <i class="fas fa-user"></i> Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========== ABOUT US ========== -->
+    <div class="about-container">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="about-hero">
+                <h1>About RC Technologies</h1>
+                <p class="lead">Your Trusted Security Partner in Karachi Since 2020</p>
+            </div>
+
+            <!-- Company Story -->
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2>Our Story</h2>
+                    <p class="lead">Founded in 2020, RC Technologies began with a simple mission: to provide reliable and affordable security solutions to the people of Karachi.</p>
+                    <p>What started as a small shop in Gulshan-e-Iqbal has now grown into one of Karachi's most trusted CCTV and security solution providers. We specialize in Dahua and Hikvision products, offering complete installation and maintenance services.</p>
+                    <p>Our team of certified technicians has completed over 500+ installations across Karachi, from residential homes to large commercial establishments.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="RC Technologies Team" class="img-fluid rounded shadow">
+                </div>
+            </div>
+
+            <!-- Mission & Vision -->
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <div class="icon-large">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To provide cutting-edge security solutions that are accessible, reliable, and backed by exceptional customer service. We aim to make Karachi safer, one property at a time.</p>
+                </div>
+
+                <div class="vision-card">
+                    <div class="icon-large">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To become Karachi's leading security solutions provider, known for innovation, quality products, and unmatched after-sales support.</p>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <p>Installations Completed</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <p>Customer Satisfaction</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <p>Support Available</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <p>Karachi Areas Served</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Journey -->
+            <h2 class="text-center mb-5">Our Journey</h2>
+            <div class="story-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <h4>Foundation</h4>
+                    <p>RC Technologies was established in Gulshan-e-Iqbal, Karachi. Started with basic CCTV installations for residential customers.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <h4>Expansion & Partnership</h4>
+                    <p>Became authorized dealer for Dahua Technology. Expanded team and started commercial installations.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <h4>Growth & Recognition</h4>
+                    <p>Added Hikvision products to our portfolio. Opened second location in North Nazimabad. Served 300+ customers.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <h4>Digital Transformation</h4>
+                    <p>Launched online store and expanded service areas across Karachi. Introduced 24/7 support system.</p>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <h2 class="text-center mb-5">Our Certifications</h2>
+            <div class="certifications">
+                <div class="cert-logo">
+                    <i class="fas fa-award fa-3x text-primary"></i>
+                </div>
+                <div class="cert-logo">
+                    <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                </div>
+                <div class="cert-logo">
+                    <i class="fas fa-certificate fa-3x text-primary"></i>
+                </div>
+                <div class="cert-logo">
+                    <i class="fas fa-medal fa-3x text-primary"></i>
+                </div>
+            </div>
+            <p class="text-center text-muted">Authorized Dahua & Hikvision Dealer | Certified Installation Team</p>
+
+            <!-- Team Section -->
+            <div class="team-section">
+                <h2 class="text-center mb-5">Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Founder">
+                        </div>
+                        <div class="team-info">
+                            <h4>Rashid Chaudhry</h4>
+                            <p class="text-muted">Founder & CEO</p>
+                            <p>15+ years experience in security systems</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Technical Head">
+                        </div>
+                        <div class="team-info">
+                            <h4>Ali Raza</h4>
+                            <p class="text-muted">Technical Head</p>
+                            <p>Dahua & Hikvision Certified Engineer</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sales Manager">
+                        </div>
+                        <div class="team-info">
+                            <h4>Zainab Khan</h4>
+                            <p class="text-muted">Sales Manager</p>
+                            <p>Customer Relations & Business Development</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Support Head">
+                        </div>
+                        <div class="team-info">
+                            <h4>Usman Ahmed</h4>
+                            <p class="text-muted">Support Head</p>
+                            <p>24/7 Customer Support & Maintenance</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values -->
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-handshake fa-3x text-primary mb-3"></i>
+                        <h4>Trust & Reliability</h4>
+                        <p>We build relationships based on trust and deliver what we promise.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-lightbulb fa-3x text-primary mb-3"></i>
+                        <h4>Innovation</h4>
+                        <p>Constantly updating our solutions with latest security technology.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h4>Customer First</h4>
+                        <p>Your security needs are our top priority, always.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========== ABOUT END ========== -->
+
+    <!-- Same Footer -->
+    <footer class="footer bg-dark text-white pt-5">
+        <!-- Same footer code -->
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

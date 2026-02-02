@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - RC Technologies</title>
+
+    <!-- Same CSS files as before -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Cart Page Specific CSS -->
+    <style>
+        .cart-container {
+            padding-top: 120px;
+            padding-bottom: 50px;
+            min-height: 70vh;
+        }
+        
+        .cart-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .cart-item {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .cart-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .cart-item-details h5 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .cart-item-brand {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .remove-item {
+            color: #dc3545;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .remove-item:hover {
+            color: #c82333;
+        }
+        
+        .cart-summary {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 140px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .total-row {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: none;
+            border-top: 2px solid var(--primary-color);
+            padding-top: 15px;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .empty-cart-icon {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .coupon-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .coupon-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .payment-methods {
+            margin-top: 20px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--accent-color);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--secondary-color);
+            background: rgba(231, 76, 60, 0.05);
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .jazzcash {
+            background: #ff6b00;
+        }
+        
+        .easypaisa {
+            background: #00a859;
+        }
+        
+        .cod {
+            background: var(--primary-color);
+        }
+        
+        .bank {
+            background: #6f42c1;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-container {
+                padding-top: 100px;
+            }
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cart-item-image {
+                margin: 0 auto 15px;
+            }
+            .cart-summary {
+                position: static;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Same Header as index.html -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contact-info">
+                            <span><i class="fas fa-phone-alt"></i> 021-1234567</span>
+                            <span class="ms-3"><i class="fab fa-whatsapp"></i> 0300-1234567</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="ms-2"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <div class="logo-container">
+                        <i class="fas fa-shield-alt logo-icon"></i>
+                        <span class="logo-text">
+                            <strong>RC</strong> Technologies
+                        </span>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="products.html">
+                                <i class="fas fa-camera"></i> Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">
+                                <i class="fas fa-tools"></i> Services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html" id="cartLink">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                                <span class="badge bg-danger" id="cartBadge">3</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link login-btn" href="login.html">
+                                <i class="fas fa-user"></i> Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========== SHOPPING CART ========== -->
+    <div class="cart-container">
+        <div class="container">
+            <div class="row">
+                <!-- Cart Items -->
+                <div class="col-lg-8">
+                    <div class="cart-header mb-4">
+                        <h3 class="mb-0"><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h3>
+                        <p class="mb-0">3 items in your cart</p>
+                    </div>
+
+                    <!-- Cart Items List -->
+                    <div id="cartItems">
+                        <!-- Item 1 -->
+                        <div class="cart-item">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="cart-item-image" alt="Dahua Camera">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="cart-item-details">
+                                        <h5>Dahua 4MP Dome Camera</h5>
+                                        <p class="cart-item-brand">Dahua Technology</p>
+                                        <p class="text-muted mb-0">Model: DH-IPC-HDW1230</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn" onclick="updateQuantity(1, -1)">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" class="quantity-input" id="qty1" value="2" min="1" onchange="updateQuantityManually(1, this.value)">
+                                        <button class="quantity-btn" onclick="updateQuantity(1, 1)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <div class="item-price" id="price1">Rs 17,000</div>
+                                </div>
+                                <div class="col-md-1 text-center">
+                                    <div class="remove-item" onclick="removeItem(1)">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="cart-item">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="cart-item-image" alt="DVR System">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="cart-item-details">
+                                        <h5>4 Channel DVR System</h5>
+                                        <p class="cart-item-brand">Hikvision</p>
+                                        <p class="text-muted mb-0">Includes 1TB HDD</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn" onclick="updateQuantity(2, -1)">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" class="quantity-input" id="qty2" value="1" min="1" onchange="updateQuantityManually(2, this.value)">
+                                        <button class="quantity-btn" onclick="updateQuantity(2, 1)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <div class="item-price" id="price2">Rs 15,000</div>
+                                </div>
+                                <div class="col-md-1 text-center">
+                                    <div class="remove-item" onclick="removeItem(2)">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="cart-item">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="cart-item-image" alt="Cable">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="cart-item-details">
+                                        <h5>100m CCTV Cable</h5>
+                                        <p class="cart-item-brand">RC Technologies</p>
+                                        <p class="text-muted mb-0">High quality copper cable</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn" onclick="updateQuantity(3, -1)">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" class="quantity-input" id="qty3" value="1" min="1" onchange="updateQuantityManually(3, this.value)">
+                                        <button class="quantity-btn" onclick="updateQuantity(3, 1)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <div class="item-price" id="price3">Rs 2,500</div>
+                                </div>
+                                <div class="col-md-1 text-center">
+                                    <div class="remove-item" onclick="removeItem(3)">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty Cart Message (Hidden by default) -->
+                    <div id="emptyCart" class="empty-cart" style="display: none;">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h4>Your cart is empty</h4>
+                        <p>Looks like you haven't added any products to your cart yet.</p>
+                        <a href="products.html" class="btn btn-primary">
+                            <i class="fas fa-shopping-bag"></i> Continue Shopping
+                        </a>
+                    </div>
+
+                    <!-- Cart Actions -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="products.html" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i> Continue Shopping
+                        </a>
+                        <button class="btn btn-warning" onclick="clearCart()">
+                            <i class="fas fa-trash"></i> Clear Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="cart-summary">
+                        <h4 class="mb-4">Order Summary</h4>
+
+                        <!-- Coupon Code -->
+                        <div class="coupon-section">
+                            <h6>Have a coupon code?</h6>
+                            <div class="coupon-input">
+                                <input type="text" class="form-control" id="couponCode" placeholder="Enter code">
+                                <button class="btn btn-sm btn-outline-primary" onclick="applyCoupon()">Apply</button>
+                            </div>
+                            <small class="text-muted" id="couponMessage"></small>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">Rs 34,500</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Delivery Charges</span>
+                            <span id="delivery">Rs 500</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Tax (13%)</span>
+                            <span id="tax">Rs 4,485</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Discount</span>
+                            <span id="discount" class="text-success">Rs 0</span>
+                        </div>
+
+                        <div class="summary-row total-row">
+                            <span>Total</span>
+                            <span id="total">Rs 39,485</span>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="payment-methods">
+                            <h6 class="mb-3">Select Payment Method</h6>
+
+                            <div class="payment-option" onclick="selectPayment('jazzcash')">
+                                <div class="payment-icon jazzcash">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">JazzCash</h6>
+                                    <small>Mobile Account</small>
+                                </div>
+                            </div>
+
+                            <div class="payment-option" onclick="selectPayment('easypaisa')">
+                                <div class="payment-icon easypaisa">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">EasyPaisa</h6>
+                                    <small>Mobile Wallet</small>
+                                </div>
+                            </div>
+
+                            <div class="payment-option selected" onclick="selectPayment('cod')">
+                                <div class="payment-icon cod">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Cash on Delivery</h6>
+                                    <small>Pay when received</small>
+                                </div>
+                            </div>
+
+                            <div class="payment-option" onclick="selectPayment('bank')">
+                                <div class="payment-icon bank">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Bank Transfer</h6>
+                                    <small>Direct bank deposit</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proceed to Checkout -->
+                        <div class="mt-4">
+                            <button class="btn btn-primary btn-lg w-100" onclick="proceedToCheckout()">
+                                <i class="fas fa-lock"></i> Proceed to Checkout
+                            </button>
+                            <p class="text-center mt-2 small text-muted">
+                                By proceeding, you agree to our <a href="#">Terms & Conditions</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========== SHOPPING CART END ========== -->
+
+    <!-- Same Footer as index.html -->
+    <footer class="footer bg-dark text-white pt-5">
+        <!-- Same footer code -->
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Cart Data
+        let cart = [{
+            id: 1,
+            name: "Dahua 4MP Dome Camera",
+            price: 8500,
+            quantity: 2,
+            image: "camera1.jpg"
+        }, {
+            id: 2,
+            name: "4 Channel DVR System",
+            price: 15000,
+            quantity: 1,
+            image: "dvr.jpg"
+        }, {
+            id: 3,
+            name: "100m CCTV Cable",
+            price: 2500,
+            quantity: 1,
+            image: "cable.jpg"
+        }];
+
+        let selectedPayment = 'cod';
+        let couponApplied = false;
+
+        // Update Quantity
+        function updateQuantity(itemId, change) {
+            const item = cart.find(item => item.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity < 1) item.quantity = 1;
+                document.getElementById(`qty${itemId}`).value = item.quantity;
+                updateCart();
+            }
+        }
+
+        // Update Quantity Manually
+        function updateQuantityManually(itemId, value) {
+            const quantity = parseInt(value) || 1;
+            const item = cart.find(item => item.id === itemId);
+            if (item) {
+                item.quantity = quantity < 1 ? 1 : quantity;
+                updateCart();
+            }
+        }
+
+        // Remove Item
+        function removeItem(itemId) {
+            if (confirm('Are you sure you want to remove this item from cart?')) {
+                cart = cart.filter(item => item.id !== itemId);
+                updateCart();
+            }
+        }
+
+        // Clear Cart
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                updateCart();
+            }
+        }
+
+        // Apply Coupon
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponCode').value.trim();
+            const messageElement = document.getElementById('couponMessage');
+
+            if (couponCode === 'RCTECH10') {
+                couponApplied = true;
+                messageElement.textContent = '✓ 10% discount applied!';
+                messageElement.style.color = 'green';
+                updateCart();
+            } else if (couponCode === '') {
+                messageElement.textContent = 'Please enter a coupon code';
+                messageElement.style.color = 'orange';
+            } else {
+                messageElement.textContent = 'Invalid coupon code';
+                messageElement.style.color = 'red';
+            }
+        }
+
+        // Select Payment Method
+        function selectPayment(method) {
+            selectedPayment = method;
+
+            // Remove selected class from all
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selected class to clicked
+            event.target.closest('.payment-option').classList.add('selected');
+        }
+
+        // Update Cart Totals
+        function updateCart() {
+            // Calculate totals
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+
+            const delivery = 500;
+            const tax = subtotal * 0.13;
+            let discount = 0;
+
+            if (couponApplied) {
+                discount = subtotal * 0.10;
+            }
+
+            const total = subtotal + delivery + tax - discount;
+
+            // Update UI
+            document.getElementById('subtotal').textContent = 'Rs ' + subtotal.toLocaleString();
+            document.getElementById('delivery').textContent = 'Rs ' + delivery.toLocaleString();
+            document.getElementById('tax').textContent = 'Rs ' + Math.round(tax).toLocaleString();
+            document.getElementById('discount').textContent = 'Rs ' + Math.round(discount).toLocaleString();
+            document.getElementById('total').textContent = 'Rs ' + Math.round(total).toLocaleString();
+
+            // Update item prices
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                document.getElementById(`price${item.id}`).textContent = 'Rs ' + itemTotal.toLocaleString();
+            });
+
+            // Update cart badge
+            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartBadge').textContent = itemCount;
+
+            // Show/hide empty cart message
+            if (cart.length === 0) {
+                document.getElementById('cartItems').style.display = 'none';
+                document.getElementById('emptyCart').style.display = 'block';
+            } else {
+                document.getElementById('cartItems').style.display = 'block';
+                document.getElementById('emptyCart').style.display = 'none';
+            }
+        }
+
+        // Proceed to Checkout
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty! Please add products to checkout.');
+                return;
+            }
+
+            // Save cart data to localStorage for checkout page
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('selectedPayment', selectedPayment);
+            localStorage.setItem('couponApplied', couponApplied);
+
+            // Redirect to checkout page
+            window.location.href = 'checkout.html';
+        }
+
+        // Initialize cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCart();
+        });
+    </script>
+</body>
+
+</html>
